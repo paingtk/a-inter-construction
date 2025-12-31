@@ -1,9 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import { getLangFromUrl, useTranslations } from '../i18n/translations';
-import { projects as allProjects, categories as allCategories } from '../i18n/projects';
-import fiberOpticFactory from '../assets/image.png';
+import { getLangFromUrl, useTranslations } from '../../i18n/translations';
+import { projects as allProjects, categories as allCategories } from '../../i18n/projects';
+import fiberOpticFactory from '../../assets/image.png';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -11,7 +11,6 @@ const t = useTranslations(lang);
 const projects = allProjects[lang];
 const categories = allCategories[lang];
 
-// Add image to first project
 const projectsWithImages = projects.map((project, index) => ({
   ...project,
   image: index === 0 ? fiberOpticFactory : null,

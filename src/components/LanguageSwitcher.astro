@@ -1,0 +1,62 @@
+---
+import { languages } from '../i18n/translations';
+
+interface Props {
+  currentLang: string;
+  currentPath: string;
+}
+
+const { currentLang, currentPath } = Astro.props;
+
+function getLocalizedPath(path: string, targetLang: string) {
+  // Remove current language prefix if exists
+  let cleanPath = path;
+  if (path.startsWith('/en')) {
+    cleanPath = path.replace('/en', '') || '/';
+  }
+
+  // Add new language prefix (except for default Thai)
+  if (targetLang === 'th') {
+    return cleanPath;
+  }
+  return `/${targetLang}${cleanPath}`;
+}
+---
+
+<div class="lang-switcher">
+  {Object.entries(languages).map(([lang, label]) => (
+    <a
+      href={getLocalizedPath(currentPath, lang)}
+      class:list={["lang-btn", { active: currentLang === lang }]}
+    >
+      {lang.toUpperCase()}
+    </a>
+  ))}
+</div>
+
+<style>
+  .lang-switcher {
+    display: flex;
+    gap: 0.25rem;
+    margin-left: 1.5rem;
+    border: 1px solid var(--color-border);
+  }
+
+  .lang-btn {
+    padding: 0.375rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-text-light);
+    background-color: var(--color-white);
+    transition: all 0.2s ease;
+  }
+
+  .lang-btn:hover {
+    color: var(--color-primary);
+  }
+
+  .lang-btn.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+</style>

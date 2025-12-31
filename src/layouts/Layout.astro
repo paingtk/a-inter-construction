@@ -1,32 +1,48 @@
 ---
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/translations';
+
 interface Props {
   title?: string;
 }
 
 const { title = "A.Inter Construction" } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const currentPath = Astro.url.pathname;
+
+// Get base path without language prefix for nav active detection
+const basePath = currentPath.replace(/^\/en/, '') || '/';
 ---
 
 <!doctype html>
-<html lang="th">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content="A.Inter Construction - บริการด้านงานก่อสร้าง ใส่ใจรายละเอียด วัสดุที่ได้มาตรฐาน ไม่ทิ้งงาน เชื่อถือได้" />
+    <meta name="description" content={t('home.hero.tagline')} />
     <title>{title}</title>
   </head>
   <body>
     <header>
       <nav>
-        <a href="/" class="logo">A.INTER</a>
-        <ul class="nav-links">
-          <li><a href="/" class:list={[{ active: currentPath === "/" }]}>หน้าแรก</a></li>
-          <li><a href="/portfolio" class:list={[{ active: currentPath === "/portfolio" || currentPath === "/portfolio/" }]}>ผลงาน</a></li>
-          <li><a href="/about" class:list={[{ active: currentPath === "/about" || currentPath === "/about/" }]}>เกี่ยวกับเรา</a></li>
-          <li><a href="/contact" class:list={[{ active: currentPath === "/contact" || currentPath === "/contact/" }]}>ติดต่อ</a></li>
-        </ul>
+        <a href={getLocalizedPath('/', lang)} class="logo">A.INTER</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="nav-right" id="nav-menu">
+          <ul class="nav-links">
+            <li><a href={getLocalizedPath('/', lang)} class:list={[{ active: basePath === '/' }]}>{t('nav.home')}</a></li>
+            <li><a href={getLocalizedPath('/portfolio', lang)} class:list={[{ active: basePath === '/portfolio' || basePath === '/portfolio/' }]}>{t('nav.portfolio')}</a></li>
+            <li><a href={getLocalizedPath('/about', lang)} class:list={[{ active: basePath === '/about' || basePath === '/about/' }]}>{t('nav.about')}</a></li>
+            <li><a href={getLocalizedPath('/contact', lang)} class:list={[{ active: basePath === '/contact' || basePath === '/contact/' }]}>{t('nav.contact')}</a></li>
+          </ul>
+          <LanguageSwitcher currentLang={lang} currentPath={currentPath} />
+        </div>
       </nav>
     </header>
 
@@ -38,20 +54,30 @@ const currentPath = Astro.url.pathname;
       <div class="footer-content">
         <div class="footer-section">
           <h3>A.INTER CONSTRUCTION</h3>
-          <p>บริษัท เอ.อินเตอร์คอนสตรัคชั่น จำกัด</p>
-          <p class="tagline">บริการด้านงานก่อสร้าง ใส่ใจรายละเอียด วัสดุที่ได้มาตรฐาน ไม่ทิ้งงาน เชื่อถือได้</p>
+          <p>{lang === 'th' ? 'บริษัท เอ.อินเตอร์คอนสตรัคชั่น จำกัด' : 'A.Inter Construction Company Limited'}</p>
+          <p class="tagline">{t('footer.tagline')}</p>
         </div>
         <div class="footer-section">
-          <h4>ติดต่อเรา</h4>
+          <h4>{t('footer.contact')}</h4>
           <p><a href="tel:0939343554">093-934-3554</a></p>
           <p><a href="tel:0939642478">093-964-2478</a></p>
           <p>LINE : 093-934-3554</p>
         </div>
         <div class="footer-section">
-          <h4>ที่อยู่</h4>
-          <p>25 ซอยนนทบุรี 6 แยก 4</p>
-          <p>ตำบลตลาดขวัญ อำเภอเมือง</p>
-          <p>จังหวัดนนทบุรี 11000</p>
+          <h4>{t('footer.address')}</h4>
+          {lang === 'th' ? (
+            <>
+              <p>25 ซอยนนทบุรี 6 แยก 4</p>
+              <p>ตำบลตลาดขวัญ อำเภอเมือง</p>
+              <p>จังหวัดนนทบุรี 11000</p>
+            </>
+          ) : (
+            <>
+              <p>25 Soi Nonthaburi 6 Yaek 4</p>
+              <p>Talat Khwan, Mueang</p>
+              <p>Nonthaburi 11000, Thailand</p>
+            </>
+          )}
         </div>
       </div>
       <div class="footer-bottom">
@@ -157,9 +183,7 @@ const currentPath = Astro.url.pathname;
     color: var(--color-text-light);
     max-width: 600px;
   }
-</style>
 
-<style>
   header {
     background-color: var(--color-white);
     border-bottom: 1px solid var(--color-border);
@@ -182,6 +206,45 @@ const currentPath = Astro.url.pathname;
     font-weight: 700;
     color: var(--color-primary);
     letter-spacing: 0.02em;
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 28px;
+    height: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 101;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-text);
+    transition: all 0.3s ease;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
   }
 
   .nav-links {
@@ -271,8 +334,40 @@ const currentPath = Astro.url.pathname;
   }
 
   @media (max-width: 768px) {
+    .hamburger {
+      display: flex;
+    }
+
+    .nav-right {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 280px;
+      height: 100vh;
+      background-color: var(--color-white);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 5rem 2rem 2rem;
+      box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+      transition: right 0.3s ease;
+      gap: 2rem;
+    }
+
+    .nav-right.active {
+      right: 0;
+    }
+
     .nav-links {
+      flex-direction: column;
       gap: 1.5rem;
+    }
+
+    .nav-links a {
+      font-size: 1.125rem;
+    }
+
+    .nav-links a.active::after {
+      display: none;
     }
 
     .footer-content {
@@ -281,3 +376,31 @@ const currentPath = Astro.url.pathname;
     }
   }
 </style>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.getElementById('nav-menu');
+
+  hamburger?.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navMenu?.classList.toggle('active');
+  });
+
+  // Close menu when clicking a link
+  const navLinks = document.querySelectorAll('.nav-links a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger?.classList.remove('active');
+      navMenu?.classList.remove('active');
+    });
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (!target.closest('nav')) {
+      hamburger?.classList.remove('active');
+      navMenu?.classList.remove('active');
+    }
+  });
+</script>
