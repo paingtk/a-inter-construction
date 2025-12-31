@@ -1,0 +1,368 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import fiberOpticFactory from '../assets/image.png';
+
+const projects = [
+  {
+    title: "โรงงานผลิตสายไฟเบอร์ออฟติก",
+    titleEn: "Fiber Optic Cable Factory",
+    category: "โรงงาน",
+    categoryEn: "Factory",
+    client: "บริษัท ฟู่หยวน บิซิเนส จำกัด",
+    location: "ตำบลบางระกำ อำเภอบางเลน จังหวัดนครปฐม",
+    value: "35 ล้านบาท",
+    area: "3,400 ตร.ม.",
+    image: fiberOpticFactory,
+  },
+  {
+    title: "โรงงานผลิตภัณฑ์บรรจุน้ำ",
+    titleEn: "Water Bottling Plant",
+    category: "โรงงาน",
+    categoryEn: "Factory",
+    client: "คุณอุทัย",
+    location: "ตำบลราษฎร์นิยม อำเภอลาดบัวหลวง จังหวัดพระนครศรีอยุธยา",
+    value: "12 ล้านบาท",
+    area: "1,600 ตร.ม."
+  },
+  {
+    title: "โรงกลึง",
+    titleEn: "Machine Shop",
+    category: "โรงงาน",
+    categoryEn: "Factory",
+    client: "คุณอภิสิทธิ์",
+    location: "ตำบลคลองควาย อำเภอลาดหลุมแก้ว จังหวัดปทุมธานี",
+    value: "5 ล้านบาท",
+    area: "750 ตร.ม."
+  },
+  {
+    title: "คลังเก็บสินค้า FMT",
+    titleEn: "FMT Warehouse",
+    category: "โกดัง",
+    categoryEn: "Warehouse",
+    client: "บริษัท FMT",
+    location: "เขตบางเขน จังหวัดกรุงเทพมหานคร",
+    value: "38 ล้านบาท",
+    area: "5,000 ตร.ม."
+  },
+  {
+    title: "คลังเก็บสินค้า HTD",
+    titleEn: "HTD Warehouse",
+    category: "โกดัง",
+    categoryEn: "Warehouse",
+    client: "บริษัท HTD",
+    location: "ตำบลวัดเทียนดัด อำเภอสามพราน จังหวัดนครปฐม",
+    value: "34 ล้านบาท",
+    area: "3,600 ตร.ม."
+  },
+  {
+    title: "บ้านในโครงการ Q House พระราม 5",
+    titleEn: "Q House Rama 5 Residence",
+    category: "บ้านพักอาศัย",
+    categoryEn: "Residential",
+    client: "บริษัท Q. House Avenue",
+    location: "โครงการ Q House พระราม 5",
+    value: "15 ล้านบาท/หลัง",
+    area: "550 ตร.ม./หลัง (2 หลัง)"
+  },
+  {
+    title: "บ้านพักอาศัย นครปฐม",
+    titleEn: "Nakhon Pathom Residence",
+    category: "บ้านพักอาศัย",
+    categoryEn: "Residential",
+    client: "คุณนิรันดร์ เป็งสลี",
+    location: "อำเภอบางเลน จังหวัดนครปฐม",
+    value: "2.5 ล้านบาท",
+    area: "200 ตร.ม."
+  },
+  {
+    title: "บ้านพักอาศัย เพชรบุรี",
+    titleEn: "Phetchaburi Residence",
+    category: "บ้านพักอาศัย",
+    categoryEn: "Residential",
+    client: "คุณนิรันดร์ เป็งสลี",
+    location: "อำเภอท่ายาง จังหวัดเพชรบุรี",
+    value: "5.5 ล้านบาท",
+    area: "350 ตร.ม."
+  },
+  {
+    title: "บ้านพักอาศัย 2 ชั้น",
+    titleEn: "Two-Story Residence",
+    category: "บ้านพักอาศัย",
+    categoryEn: "Residential",
+    client: "คุณกัณฑนิตย์ ชัญญะวัฒน์โภคิน",
+    location: "กรุงเทพมหานคร",
+    value: "3.5 ล้านบาท",
+    area: "250 ตร.ม."
+  },
+  {
+    title: "บ้านในโครงการ Grand Bangkok Boulevard",
+    titleEn: "Grand Bangkok Boulevard Residence",
+    category: "บ้านพักอาศัย",
+    categoryEn: "Residential",
+    client: "บริษัท เอสซี แอสเสท คอร์ปอเรชั่น จำกัด (มหาชน)",
+    location: "ถนนราชมนตรี เขตบางแค กรุงเทพมหานคร",
+    value: "4-5 ล้านบาท/หลัง",
+    area: "700-800 ตร.ม. (3 หลัง)"
+  },
+  {
+    title: "บ้านพักอาศัย ค.ส.ล. 2 ชั้น",
+    titleEn: "RC Two-Story Residence",
+    category: "บ้านพักอาศัย",
+    categoryEn: "Residential",
+    client: "คุณพรทิพย์ อนุตริยะ",
+    location: "ตำบลศาลาธรรมสพน์ อำเภอทวีวัฒนา กรุงเทพมหานคร",
+    value: "10 ล้านบาท",
+    area: "600 ตร.ม."
+  },
+  {
+    title: "อาคาร 4 ชั้น และโกดังเก็บสินค้า",
+    titleEn: "4-Story Building & Warehouses",
+    category: "อาคาร",
+    categoryEn: "Building",
+    client: "-",
+    location: "-",
+    value: "-",
+    area: "อาคาร 4 ชั้น 1 หลัง, อาคารที่พัก 2 ชั้น 1 หลัง, โกดัง 2 หลัง"
+  }
+];
+
+const categories = ["ทั้งหมด", "โรงงาน", "โกดัง", "บ้านพักอาศัย", "อาคาร"];
+---
+
+<Layout title="ผลงานของเรา - A.Inter Construction">
+  <section class="page-header">
+    <div class="container">
+      <h1>ผลงานของเรา</h1>
+      <p>โครงการก่อสร้างที่เราภาคภูมิใจ ด้วยคุณภาพและความใส่ใจในทุกรายละเอียด</p>
+    </div>
+  </section>
+
+  <section class="portfolio section">
+    <div class="container">
+      <div class="filter-buttons">
+        {categories.map((category, index) => (
+          <button class:list={["filter-btn", { active: index === 0 }]} data-category={category === "ทั้งหมด" ? "all" : category}>{category}</button>
+        ))}
+      </div>
+
+      <div class="projects-grid">
+        {projects.map((project) => (
+          <article class="project-card" data-category={project.category}>
+            <div class="project-image">
+              {project.image && <Image src={project.image} alt={project.title} class="project-img" />}
+              <span class="project-category">{project.category}</span>
+            </div>
+            <div class="project-content">
+              <h3>{project.title}</h3>
+              <span class="project-title-en">{project.titleEn}</span>
+              <div class="project-details">
+                <div class="detail-item">
+                  <span class="detail-label">เจ้าของโครงการ</span>
+                  <span class="detail-value">{project.client}</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">สถานที่</span>
+                  <span class="detail-value">{project.location}</span>
+                </div>
+                <div class="detail-row">
+                  <div class="detail-item">
+                    <span class="detail-label">มูลค่างาน</span>
+                    <span class="detail-value highlight">{project.value}</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="detail-label">พื้นที่</span>
+                    <span class="detail-value">{project.area}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 4rem 0;
+  }
+
+  .page-header h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header p {
+    font-size: 1.125rem;
+    opacity: 0.9;
+    max-width: 500px;
+  }
+
+  .filter-buttons {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 0.625rem 1.25rem;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-light);
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .project-card.hidden {
+    display: none;
+  }
+
+  .project-image {
+    height: 200px;
+    background-color: var(--color-bg-alt);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .project-image :global(.project-img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .project-category {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .project-content {
+    padding: 1.5rem;
+  }
+
+  .project-content h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--color-text);
+  }
+
+  .project-title-en {
+    display: block;
+    font-size: 0.8125rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  .project-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .detail-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .detail-label {
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-light);
+  }
+
+  .detail-value {
+    font-size: 0.875rem;
+    color: var(--color-text);
+  }
+
+  .detail-value.highlight {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2rem;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .detail-row {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+  }
+</style>
+
+<script>
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      const category = button.dataset.category;
+
+      projectCards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>

@@ -1,0 +1,294 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const values = [
+  {
+    title: "ใส่ใจรายละเอียด",
+    titleEn: "Attention to Detail",
+    description: "ทุกขั้นตอนการก่อสร้างเราให้ความสำคัญกับรายละเอียดทุกจุด"
+  },
+  {
+    title: "วัสดุมาตรฐาน",
+    titleEn: "Quality Materials",
+    description: "ใช้วัสดุอุปกรณ์ที่ได้มาตรฐาน คุณภาพสูง"
+  },
+  {
+    title: "ไม่ละทิ้งงาน",
+    titleEn: "Commitment",
+    description: "เราไม่ละทิ้งงาน ทำจนเสร็จสมบูรณ์ตามสัญญา"
+  },
+  {
+    title: "ความน่าเชื่อถือ",
+    titleEn: "Reliability",
+    description: "สร้างความพึงพอใจและความไว้วางใจให้แก่ลูกค้าทุกราย"
+  }
+];
+
+const services = [
+  "ก่อสร้างอาคาร",
+  "อาคารพาณิชย์",
+  "อาคารที่พักอาศัย",
+  "สถานที่ทำการ",
+  "ถนน สะพาน",
+  "เขื่อน อุโมงค์",
+  "โรงงานและโกดัง",
+  "งานโยธาทุกประเภท"
+];
+---
+
+<Layout title="เกี่ยวกับเรา - A.Inter Construction">
+  <section class="page-header">
+    <div class="container">
+      <h1>เกี่ยวกับเรา</h1>
+      <p>บริษัท เอ.อินเตอร์คอนสตรัคชั่น จำกัด</p>
+    </div>
+  </section>
+
+  <section class="about-intro section">
+    <div class="container">
+      <div class="intro-content">
+        <h2>A.INTER CONSTRUCTION COMPANY LIMITED</h2>
+        <p class="intro-lead">บริษัท เอ.อินเตอร์คอนสตรัคชั่น จำกัด ประกอบกิจการรับเหมาก่อสร้างอาคาร อาคารพาณิชย์ อาคารที่พักอาศัย สถานที่ทำการ ถนน สะพาน เขื่อน อุโมงค์ และการก่อสร้างอย่างอื่นทุกชนิด รวมทั้งงานโยธาทุกประเภท</p>
+        <p>เราสามารถทำการก่อสร้าง งานโรงงานและโกดัง อาคาร บ้านพักอาศัย ได้ปีละมากกว่าหนึ่งหมื่นตารางเมตรขึ้นไป</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="vision section">
+    <div class="container">
+      <div class="vision-content">
+        <h2>วิสัยทัศน์ของเรา</h2>
+        <p class="vision-text">เราใส่ใจรายละเอียด ใช้วัสดุอุปกรณ์ที่ได้มาตรฐาน ไม่ละทิ้งงาน และมีความน่าเชื่อถือ สร้างความพึงพอใจให้แก่ลูกค้า</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="values section">
+    <div class="container">
+      <h2 class="section-title">คุณค่าของเรา</h2>
+      <p class="section-subtitle">หลักการที่เรายึดมั่นในทุกโครงการ</p>
+      <div class="values-grid">
+        {values.map((value) => (
+          <div class="value-card">
+            <h3>{value.title}</h3>
+            <span class="value-title-en">{value.titleEn}</span>
+            <p>{value.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="services-list section">
+    <div class="container">
+      <h2 class="section-title">บริการของเรา</h2>
+      <p class="section-subtitle">รับเหมาก่อสร้างครบวงจร</p>
+      <div class="services-grid">
+        {services.map((service) => (
+          <div class="service-item">
+            <span>{service}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="capacity section">
+    <div class="container">
+      <div class="capacity-content">
+        <h2>ศักยภาพของเรา</h2>
+        <div class="capacity-stat">
+          <span class="capacity-number">10,000+</span>
+          <span class="capacity-label">ตารางเมตร ต่อปี</span>
+        </div>
+        <p>เราสามารถทำการก่อสร้าง งานโรงงานและโกดัง อาคาร บ้านพักอาศัย ได้ปีละมากกว่าหนึ่งหมื่นตารางเมตรขึ้นไป</p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 4rem 0;
+  }
+
+  .page-header h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header p {
+    font-size: 1.125rem;
+    opacity: 0.9;
+  }
+
+  .about-intro {
+    background-color: var(--color-white);
+  }
+
+  .intro-content {
+    max-width: 800px;
+  }
+
+  .intro-content h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--color-primary);
+  }
+
+  .intro-lead {
+    font-size: 1.125rem;
+    color: var(--color-text);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .intro-content p {
+    font-size: 1rem;
+    color: var(--color-text-light);
+    line-height: 1.8;
+  }
+
+  .vision {
+    background-color: var(--color-bg-alt);
+  }
+
+  .vision-content {
+    max-width: 700px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .vision-content h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+  }
+
+  .vision-text {
+    font-size: 1.25rem;
+    color: var(--color-text);
+    line-height: 1.8;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .value-card {
+    background-color: var(--color-white);
+    padding: 1.75rem;
+    border: 1px solid var(--color-border);
+  }
+
+  .value-card h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--color-text);
+  }
+
+  .value-title-en {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .value-card p {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    line-height: 1.6;
+  }
+
+  .services-list {
+    background-color: var(--color-white);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+
+  .service-item {
+    background-color: var(--color-bg);
+    padding: 1.25rem;
+    text-align: center;
+    border: 1px solid var(--color-border);
+  }
+
+  .service-item span {
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .capacity {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .capacity-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .capacity-content h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+
+  .capacity-stat {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+  }
+
+  .capacity-number {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .capacity-label {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    margin-top: 0.5rem;
+  }
+
+  .capacity-content p {
+    font-size: 1rem;
+    opacity: 0.85;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 768px) {
+    .page-header h1 {
+      font-size: 2rem;
+    }
+
+    .values-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .capacity-number {
+      font-size: 3rem;
+    }
+  }
+</style>
