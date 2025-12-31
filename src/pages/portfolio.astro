@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import { getLangFromUrl, useTranslations } from '../i18n/translations';
 import { projects as allProjects, categories as allCategories } from '../i18n/projects';
-import fiberOpticFactory from '../assets/image.png';
+import fiberOpticFactory from '../assets/fiber-optic-cable-factory.png';
 import waterBottlingPlant from '../assets/water-bottling-plant.png';
 import machineShop from '../assets/machine-shop.png';
 import fmtWarehouse from '../assets/fmt-warehouse.png';
@@ -40,10 +40,17 @@ const projectsWithImages = projects.map((project, index) => ({
 
   <section class="portfolio section">
     <div class="container">
-      <div class="filter-buttons">
-        {categories.map((category, index) => (
-          <button class:list={["filter-btn", { active: index === 0 }]} data-category={index === 0 ? "all" : category}>{category}</button>
-        ))}
+      <div class="filter-wrapper">
+        <div class="filter-buttons">
+          {categories.map((category, index) => (
+            <button class:list={["filter-btn", { active: index === 0 }]} data-category={index === 0 ? "all" : category}>{category}</button>
+          ))}
+        </div>
+        <select class="filter-select" id="filter-select">
+          {categories.map((category, index) => (
+            <option value={index === 0 ? "all" : category}>{category}</option>
+          ))}
+        </select>
       </div>
 
       <div class="projects-grid">
@@ -103,10 +110,13 @@ const projectsWithImages = projects.map((project, index) => ({
     max-width: 500px;
   }
 
+  .filter-wrapper {
+    margin-bottom: 2.5rem;
+  }
+
   .filter-buttons {
     display: flex;
     gap: 0.75rem;
-    margin-bottom: 2.5rem;
     flex-wrap: wrap;
   }
 
@@ -125,6 +135,26 @@ const projectsWithImages = projects.map((project, index) => ({
     background-color: var(--color-primary);
     border-color: var(--color-primary);
     color: var(--color-white);
+  }
+
+  .filter-select {
+    display: none;
+    width: 100%;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-white);
+    color: var(--color-text);
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+  }
+
+  .filter-select:focus {
+    outline: none;
+    border-color: var(--color-primary);
   }
 
   .projects-grid {
@@ -244,6 +274,14 @@ const projectsWithImages = projects.map((project, index) => ({
       font-size: 2rem;
     }
 
+    .filter-buttons {
+      display: none;
+    }
+
+    .filter-select {
+      display: block;
+    }
+
     .project-card {
       grid-template-columns: 1fr;
     }
@@ -260,22 +298,30 @@ const projectsWithImages = projects.map((project, index) => ({
 
 <script>
   const filterButtons = document.querySelectorAll('.filter-btn');
+  const filterSelect = document.getElementById('filter-select') as HTMLSelectElement;
   const projectCards = document.querySelectorAll('.project-card');
+
+  function filterProjects(category: string) {
+    projectCards.forEach(card => {
+      if (category === 'all' || (card as HTMLElement).dataset.category === category) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  }
 
   filterButtons.forEach(button => {
     button.addEventListener('click', () => {
       filterButtons.forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
-
-      const category = button.dataset.category;
-
-      projectCards.forEach(card => {
-        if (category === 'all' || card.dataset.category === category) {
-          card.classList.remove('hidden');
-        } else {
-          card.classList.add('hidden');
-        }
-      });
+      const category = (button as HTMLElement).dataset.category || 'all';
+      filterProjects(category);
     });
+  });
+
+  filterSelect?.addEventListener('change', () => {
+    const category = filterSelect.value;
+    filterProjects(category);
   });
 </script>
