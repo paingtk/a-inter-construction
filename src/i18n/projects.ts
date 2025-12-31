@@ -18,6 +18,7 @@ export const projects = {
       location: "ตำบลราษฎร์นิยม อำเภอลาดบัวหลวง จังหวัดพระนครศรีอยุธยา",
       value: "12 ล้านบาท",
       area: "1,600 ตร.ม.",
+      hasImage: true,
     },
     {
       title: "โรงกลึง",
@@ -27,6 +28,7 @@ export const projects = {
       location: "ตำบลคลองควาย อำเภอลาดหลุมแก้ว จังหวัดปทุมธานี",
       value: "5 ล้านบาท",
       area: "750 ตร.ม.",
+      hasImage: true,
     },
     {
       title: "คลังเก็บสินค้า FMT",
@@ -36,6 +38,7 @@ export const projects = {
       location: "เขตบางเขน จังหวัดกรุงเทพมหานคร",
       value: "38 ล้านบาท",
       area: "5,000 ตร.ม.",
+      hasImage: true,
     },
     {
       title: "คลังเก็บสินค้า HTD",
@@ -45,6 +48,7 @@ export const projects = {
       location: "ตำบลวัดเทียนดัด อำเภอสามพราน จังหวัดนครปฐม",
       value: "34 ล้านบาท",
       area: "3,600 ตร.ม.",
+      hasImage: true,
     },
     {
       title: "บ้านในโครงการ Q House พระราม 5",
@@ -54,6 +58,7 @@ export const projects = {
       location: "โครงการ Q House พระราม 5",
       value: "15 ล้านบาท/หลัง",
       area: "550 ตร.ม./หลัง (2 หลัง)",
+      hasImage: true,
     },
     {
       title: "บ้านพักอาศัย นครปฐม",
@@ -63,6 +68,7 @@ export const projects = {
       location: "อำเภอบางเลน จังหวัดนครปฐม",
       value: "2.5 ล้านบาท",
       area: "200 ตร.ม.",
+      hasImage: true,
     },
     {
       title: "บ้านพักอาศัย เพชรบุรี",
@@ -72,6 +78,7 @@ export const projects = {
       location: "อำเภอท่ายาง จังหวัดเพชรบุรี",
       value: "5.5 ล้านบาท",
       area: "350 ตร.ม.",
+      hasImage: true,
     },
     {
       title: "บ้านพักอาศัย 2 ชั้น",
@@ -81,6 +88,7 @@ export const projects = {
       location: "กรุงเทพมหานคร",
       value: "3.5 ล้านบาท",
       area: "250 ตร.ม.",
+      hasImage: true,
     },
     {
       title: "บ้านในโครงการ Grand Bangkok Boulevard",
@@ -90,6 +98,7 @@ export const projects = {
       location: "ถนนราชมนตรี เขตบางแค กรุงเทพมหานคร",
       value: "4-5 ล้านบาท/หลัง",
       area: "700-800 ตร.ม. (3 หลัง)",
+      hasImage: true,
     },
     {
       title: "บ้านพักอาศัย ค.ส.ล. 2 ชั้น",
@@ -99,6 +108,7 @@ export const projects = {
       location: "ตำบลศาลาธรรมสพน์ อำเภอทวีวัฒนา กรุงเทพมหานคร",
       value: "10 ล้านบาท",
       area: "600 ตร.ม.",
+      hasImage: true,
     },
     {
       title: "อาคาร 4 ชั้น และโกดังเก็บสินค้า",
@@ -108,6 +118,7 @@ export const projects = {
       location: "-",
       value: "-",
       area: "อาคาร 4 ชั้น 1 หลัง, อาคารที่พัก 2 ชั้น 1 หลัง, โกดัง 2 หลัง",
+      hasImage: true,
     },
   ],
   en: [
@@ -129,6 +140,7 @@ export const projects = {
       location: "Rat Niyom, Lat Bua Luang, Phra Nakhon Si Ayutthaya",
       value: "12 Million Baht",
       area: "1,600 sq.m.",
+      hasImage: true,
     },
     {
       title: "Machine Shop",
@@ -138,6 +150,7 @@ export const projects = {
       location: "Khlong Khwai, Lat Lum Kaeo, Pathum Thani",
       value: "5 Million Baht",
       area: "750 sq.m.",
+      hasImage: true,
     },
     {
       title: "FMT Warehouse",
@@ -147,6 +160,7 @@ export const projects = {
       location: "Bang Khen, Bangkok",
       value: "38 Million Baht",
       area: "5,000 sq.m.",
+      hasImage: true,
     },
     {
       title: "HTD Warehouse",
@@ -156,6 +170,7 @@ export const projects = {
       location: "Wat Thian Dad, Sam Phran, Nakhon Pathom",
       value: "34 Million Baht",
       area: "3,600 sq.m.",
+      hasImage: true,
     },
     {
       title: "Q House Rama 5 Residence",
@@ -165,6 +180,7 @@ export const projects = {
       location: "Q House Rama 5 Project",
       value: "15 Million Baht/unit",
       area: "550 sq.m./unit (2 units)",
+      hasImage: true,
     },
     {
       title: "Nakhon Pathom Residence",
@@ -174,6 +190,7 @@ export const projects = {
       location: "Bang Len, Nakhon Pathom",
       value: "2.5 Million Baht",
       area: "200 sq.m.",
+      hasImage: true,
     },
     {
       title: "Phetchaburi Residence",
@@ -183,6 +200,7 @@ export const projects = {
       location: "Tha Yang, Phetchaburi",
       value: "5.5 Million Baht",
       area: "350 sq.m.",
+      hasImage: true,
     },
     {
       title: "Two-Story Residence",
@@ -192,6 +210,7 @@ export const projects = {
       location: "Bangkok",
       value: "3.5 Million Baht",
       area: "250 sq.m.",
+      hasImage: true,
     },
     {
       title: "Grand Bangkok Boulevard Residence",
@@ -201,6 +220,7 @@ export const projects = {
       location: "Ratchamontri Road, Bang Khae, Bangkok",
       value: "4-5 Million Baht/unit",
       area: "700-800 sq.m. (3 units)",
+      hasImage: true,
     },
     {
       title: "RC Two-Story Residence",
@@ -210,6 +230,7 @@ export const projects = {
       location: "Sala Thammasop, Thawi Watthana, Bangkok",
       value: "10 Million Baht",
       area: "600 sq.m.",
+      hasImage: true,
     },
     {
       title: "4-Story Building & Warehouses",
@@ -219,6 +240,7 @@ export const projects = {
       location: "-",
       value: "-",
       area: "1x 4-story building, 1x 2-story residence, 2x warehouses",
+      hasImage: true,
     },
   ],
 };

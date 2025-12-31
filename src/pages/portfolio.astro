@@ -4,6 +4,17 @@ import { Image } from 'astro:assets';
 import { getLangFromUrl, useTranslations } from '../i18n/translations';
 import { projects as allProjects, categories as allCategories } from '../i18n/projects';
 import fiberOpticFactory from '../assets/image.png';
+import waterBottlingPlant from '../assets/water-bottling-plant.png';
+import machineShop from '../assets/machine-shop.png';
+import fmtWarehouse from '../assets/fmt-warehouse.png';
+import htdWarehouse from '../assets/htd-warehouse.png';
+import qHouseRama5Residence from '../assets/q-house-rama-5-residence.png';
+import nakhonPathomResidence from '../assets/nakhon-pathom-residence.png';
+import phetchaburiResidence from '../assets/phetchaburi-residence.png';
+import twoStoryResidence from '../assets/two-story-residence.png';
+import grandBangkokBoulevardResidence from '../assets/grand-bangkok-boulevard-residence.png';
+import rcTwoStoryResidence from '../assets/rc-two-story-residence.png';
+import fourStoryBuildingAndWarehouses from '../assets/four-story-building-and-warehouses.png';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -11,10 +22,11 @@ const t = useTranslations(lang);
 const projects = allProjects[lang];
 const categories = allCategories[lang];
 
-// Add image to first project
+const projectImages = [fiberOpticFactory, waterBottlingPlant, machineShop, fmtWarehouse, htdWarehouse, qHouseRama5Residence, nakhonPathomResidence, phetchaburiResidence, twoStoryResidence, grandBangkokBoulevardResidence, rcTwoStoryResidence, fourStoryBuildingAndWarehouses];
+
 const projectsWithImages = projects.map((project, index) => ({
   ...project,
-  image: index === 0 ? fiberOpticFactory : null,
+  image: projectImages[index] || null,
 }));
 ---
 
@@ -116,12 +128,14 @@ const projectsWithImages = projects.map((project, index) => ({
   }
 
   .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: column;
     gap: 1.5rem;
   }
 
   .project-card {
+    display: grid;
+    grid-template-columns: 350px 1fr;
     background-color: var(--color-white);
     border: 1px solid var(--color-border);
     overflow: hidden;
@@ -138,7 +152,8 @@ const projectsWithImages = projects.map((project, index) => ({
   }
 
   .project-image {
-    height: 200px;
+    height: 100%;
+    min-height: 220px;
     background-color: var(--color-bg-alt);
     position: relative;
     display: flex;
@@ -165,11 +180,14 @@ const projectsWithImages = projects.map((project, index) => ({
   }
 
   .project-content {
-    padding: 1.5rem;
+    padding: 1.75rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .project-content h3 {
-    font-size: 1.125rem;
+    font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.25rem;
     color: var(--color-text);
@@ -177,15 +195,15 @@ const projectsWithImages = projects.map((project, index) => ({
 
   .project-title-en {
     display: block;
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
     color: var(--color-primary);
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
   }
 
   .project-details {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
   }
 
   .detail-item {
@@ -195,9 +213,7 @@ const projectsWithImages = projects.map((project, index) => ({
   }
 
   .detail-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    display: contents;
   }
 
   .detail-label {
@@ -208,7 +224,7 @@ const projectsWithImages = projects.map((project, index) => ({
   }
 
   .detail-value {
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     color: var(--color-text);
   }
 
@@ -217,18 +233,27 @@ const projectsWithImages = projects.map((project, index) => ({
     font-weight: 600;
   }
 
+  @media (max-width: 900px) {
+    .project-card {
+      grid-template-columns: 280px 1fr;
+    }
+  }
+
   @media (max-width: 768px) {
     .page-header h1 {
       font-size: 2rem;
     }
 
-    .projects-grid {
+    .project-card {
       grid-template-columns: 1fr;
     }
 
-    .detail-row {
+    .project-image {
+      min-height: 200px;
+    }
+
+    .project-details {
       grid-template-columns: 1fr;
-      gap: 0.75rem;
     }
   }
 </style>
