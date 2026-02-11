@@ -43,7 +43,7 @@ const services = lang === 'th'
 
   <section class="about-intro section">
     <div class="container">
-      <div class="intro-content">
+      <div class="intro-content" data-animate>
         <h2>A.INTER CONSTRUCTION COMPANY LIMITED</h2>
         <p class="intro-lead">{t('about.intro')}</p>
         <p>{t('about.capacity')}</p>
@@ -53,7 +53,7 @@ const services = lang === 'th'
 
   <section class="vision section">
     <div class="container">
-      <div class="vision-content">
+      <div class="vision-content" data-animate>
         <h2>{t('about.vision.title')}</h2>
         <p class="vision-text">{t('about.vision.text')}</p>
       </div>
@@ -62,11 +62,11 @@ const services = lang === 'th'
 
   <section class="values section">
     <div class="container">
-      <h2 class="section-title">{t('about.values.title')}</h2>
-      <p class="section-subtitle">{t('about.values.subtitle')}</p>
-      <div class="values-grid">
+      <h2 class="section-title" data-animate>{t('about.values.title')}</h2>
+      <p class="section-subtitle" data-animate>{t('about.values.subtitle')}</p>
+      <div class="values-grid" data-stagger>
         {values.map((value) => (
-          <div class="value-card">
+          <div class="value-card" data-animate>
             <h3>{value.title}</h3>
             <span class="value-title-en">{value.titleEn}</span>
             <p>{value.description}</p>
@@ -78,11 +78,11 @@ const services = lang === 'th'
 
   <section class="services-list section">
     <div class="container">
-      <h2 class="section-title">{t('about.services.title')}</h2>
-      <p class="section-subtitle">{t('about.services.subtitle')}</p>
-      <div class="services-grid">
+      <h2 class="section-title" data-animate>{t('about.services.title')}</h2>
+      <p class="section-subtitle" data-animate>{t('about.services.subtitle')}</p>
+      <div class="services-grid" data-stagger>
         {services.map((service) => (
-          <div class="service-item">
+          <div class="service-item" data-animate>
             <span>{service}</span>
           </div>
         ))}
@@ -92,10 +92,10 @@ const services = lang === 'th'
 
   <section class="capacity section">
     <div class="container">
-      <div class="capacity-content">
+      <div class="capacity-content" data-animate>
         <h2>{t('about.capacity.title')}</h2>
         <div class="capacity-stat">
-          <span class="capacity-number">10,000+</span>
+          <span class="capacity-number" data-count="10000" data-suffix="+">0</span>
           <span class="capacity-label">{t('about.capacity.unit')}</span>
         </div>
         <p>{t('about.capacity')}</p>

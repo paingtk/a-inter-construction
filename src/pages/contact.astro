@@ -42,7 +42,7 @@ const contactInfo = [
   <section class="contact section">
     <div class="container">
       <div class="contact-grid">
-        <div class="contact-form-wrapper">
+        <div class="contact-form-wrapper" data-animate>
           <h2>{t('contact.form.title')}</h2>
           <form class="contact-form" id="contact-form" data-success={t('contact.form.success')}>
             <div class="form-row">
@@ -78,8 +78,8 @@ const contactInfo = [
           </form>
         </div>
 
-        <div class="contact-info-wrapper">
-          <div class="contact-details">
+        <div class="contact-info-wrapper" data-stagger>
+          <div class="contact-details" data-animate>
             <h3>{t('contact.info.title')}</h3>
             <ul class="contact-list">
               {contactInfo.map((item) => (
@@ -95,7 +95,7 @@ const contactInfo = [
             </ul>
           </div>
 
-          <div class="line-contact">
+          <div class="line-contact" data-animate>
             <h3>{t('contact.line.title')}</h3>
             <div class="line-info">
               <span class="line-id">LINE : 093-934-3554</span>
@@ -103,7 +103,7 @@ const contactInfo = [
             </div>
           </div>
 
-          <div class="quick-contact">
+          <div class="quick-contact" data-animate>
             <h3>{t('contact.call.title')}</h3>
             <a href="tel:0939343554" class="phone-link">
               <span class="phone-number">093-934-3554</span>
@@ -117,7 +117,7 @@ const contactInfo = [
 
   <section class="tagline">
     <div class="container">
-      <p>{t('contact.tagline')}</p>
+      <p data-animate>{t('contact.tagline')}</p>
     </div>
   </section>
 </Layout>

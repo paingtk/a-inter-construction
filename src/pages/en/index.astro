@@ -6,10 +6,10 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const stats = [
-  { number: "10,000+", label: t('home.stats.sqm') },
-  { number: "12+", label: t('home.stats.projects') },
-  { number: "150+", label: t('home.stats.million') },
-  { number: "100%", label: t('home.stats.satisfaction') }
+  { number: 10000, suffix: "+", label: t('home.stats.sqm') },
+  { number: 12, suffix: "+", label: t('home.stats.projects') },
+  { number: 150, suffix: "+", label: t('home.stats.million') },
+  { number: 100, suffix: "%", label: t('home.stats.satisfaction') }
 ];
 
 const services = [
@@ -48,10 +48,10 @@ const services = [
 
   <section class="stats">
     <div class="container">
-      <div class="stats-grid">
+      <div class="stats-grid" data-stagger>
         {stats.map((stat) => (
-          <div class="stat-item">
-            <span class="stat-number">{stat.number}</span>
+          <div class="stat-item" data-animate>
+            <span class="stat-number" data-count={stat.number} data-suffix={stat.suffix}>0</span>
             <span class="stat-label">{stat.label}</span>
           </div>
         ))}
@@ -61,11 +61,11 @@ const services = [
 
   <section class="services section">
     <div class="container">
-      <h2 class="section-title">{t('home.services.title')}</h2>
-      <p class="section-subtitle">{t('home.services.subtitle')}</p>
-      <div class="services-grid">
+      <h2 class="section-title" data-animate>{t('home.services.title')}</h2>
+      <p class="section-subtitle" data-animate>{t('home.services.subtitle')}</p>
+      <div class="services-grid" data-stagger>
         {services.map((service) => (
-          <div class="service-card">
+          <div class="service-card" data-animate>
             <h3>{service.title}</h3>
             <span class="service-title-en">{service.titleEn}</span>
             <p>{service.description}</p>
@@ -77,7 +77,7 @@ const services = [
 
   <section class="cta">
     <div class="container">
-      <div class="cta-content">
+      <div class="cta-content" data-animate>
         <h2>{t('home.cta.title')}</h2>
         <p>{t('home.cta.subtitle')}</p>
         <a href={getLocalizedPath('/contact', lang)} class="btn">{t('home.cta.button')}</a>

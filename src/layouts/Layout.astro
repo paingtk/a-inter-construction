@@ -333,6 +333,27 @@ const basePath = currentPath.replace(/^\/en/, '') || '/';
     opacity: 0.7;
   }
 
+  /* Scroll reveal animations */
+  [data-animate] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition-delay: var(--delay, 0s);
+  }
+
+  [data-animate].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-animate] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
   @media (max-width: 768px) {
     .hamburger {
       display: flex;
@@ -403,4 +424,65 @@ const basePath = currentPath.replace(/^\/en/, '') || '/';
       navMenu?.classList.remove('active');
     }
   });
+
+  // Scroll reveal animations
+  const animatedElements = document.querySelectorAll('[data-animate]');
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target as HTMLElement;
+
+          // Stagger children if data-stagger is set
+          if (el.hasAttribute('data-stagger')) {
+            const children = el.querySelectorAll('[data-animate]');
+            children.forEach((child, i) => {
+              (child as HTMLElement).style.setProperty('--delay', `${i * 0.1}s`);
+              child.classList.add('is-visible');
+            });
+          }
+
+          el.classList.add('is-visible');
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    animatedElements.forEach(el => observer.observe(el));
+  } else {
+    animatedElements.forEach(el => el.classList.add('is-visible'));
+  }
+
+  // Count-up animation for stat numbers
+  function animateCount(el: HTMLElement) {
+    const target = parseInt(el.dataset.count || '0', 10);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1500;
+    const start = performance.now();
+
+    function update(now: number) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease-out curve for a decelerating feel
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(eased * target);
+      el.textContent = current.toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  const countElements = document.querySelectorAll<HTMLElement>('[data-count]');
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCount(entry.target as HTMLElement);
+        countObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  countElements.forEach(el => countObserver.observe(el));
 </script>

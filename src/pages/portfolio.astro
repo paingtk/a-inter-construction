@@ -40,7 +40,7 @@ const projectsWithImages = projects.map((project, index) => ({
 
   <section class="portfolio section">
     <div class="container">
-      <div class="filter-wrapper">
+      <div class="filter-wrapper" data-animate>
         <div class="filter-buttons">
           {categories.map((category, index) => (
             <button class:list={["filter-btn", { active: index === 0 }]} data-category={index === 0 ? "all" : category}>{category}</button>
@@ -53,9 +53,9 @@ const projectsWithImages = projects.map((project, index) => ({
         </select>
       </div>
 
-      <div class="projects-grid">
+      <div class="projects-grid" data-stagger>
         {projectsWithImages.map((project) => (
-          <article class="project-card" data-category={project.category}>
+          <article class="project-card" data-animate data-category={project.category}>
             <div class="project-image">
               {project.image && <Image src={project.image} alt={project.title} class="project-img" />}
               <span class="project-category">{project.category}</span>
@@ -169,10 +169,10 @@ const projectsWithImages = projects.map((project, index) => ({
     background-color: var(--color-white);
     border: 1px solid var(--color-border);
     overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.2s ease;
   }
 
-  .project-card:hover {
+  .project-card.is-visible:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
