@@ -4,12 +4,15 @@ import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/trans
 
 interface Props {
   title?: string;
+  description?: string;
 }
 
-const { title = "A.Inter Construction" } = Astro.props;
+const { title = "A.Inter Construction", description } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const currentPath = Astro.url.pathname;
+const metaDescription = description || t('home.hero.tagline');
+const ogLocale = lang === 'th' ? 'th_TH' : 'en_US';
 
 // Get base path without language prefix for nav active detection
 const basePath = currentPath.replace(/^\/en/, '') || '/';
@@ -22,7 +25,15 @@ const basePath = currentPath.replace(/^\/en/, '') || '/';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={t('home.hero.tagline')} />
+    <meta name="description" content={metaDescription} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:site_name" content="A.Inter Construction" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={metaDescription} />
     <title>{title}</title>
   </head>
   <body>
@@ -84,6 +95,16 @@ const basePath = currentPath.replace(/^\/en/, '') || '/';
         <p>&copy; {new Date().getFullYear()} A.Inter Construction. All rights reserved.</p>
       </div>
     </footer>
+
+    <!-- LINE floating chat button -->
+    <a href="https://line.me/ti/p/~0939343554" target="_blank" rel="noopener noreferrer" class="line-float" aria-label="Contact via LINE">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.271.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+    </a>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
   </body>
 </html>
 
@@ -333,6 +354,57 @@ const basePath = currentPath.replace(/^\/en/, '') || '/';
     opacity: 0.7;
   }
 
+  /* Floating buttons */
+  .line-float {
+    position: fixed;
+    bottom: 5.5rem;
+    right: 1.5rem;
+    width: 52px;
+    height: 52px;
+    background-color: #06C755;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease;
+    z-index: 90;
+  }
+
+  .line-float:hover {
+    transform: scale(1.1);
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease;
+    z-index: 90;
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .back-to-top:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+  }
+
   /* Scroll reveal animations */
   [data-animate] {
     opacity: 0;
@@ -423,6 +495,19 @@ const basePath = currentPath.replace(/^\/en/, '') || '/';
       hamburger?.classList.remove('active');
       navMenu?.classList.remove('active');
     }
+  });
+
+  // Back to top button
+  const backToTop = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+      backToTop?.classList.add('visible');
+    } else {
+      backToTop?.classList.remove('visible');
+    }
+  });
+  backToTop?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   // Scroll reveal animations

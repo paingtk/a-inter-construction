@@ -120,6 +120,16 @@ const contactInfo = [
       <p data-animate>{t('contact.tagline')}</p>
     </div>
   </section>
+
+  <section class="map">
+    <iframe
+      src="https://www.openstreetmap.org/export/embed.html?bbox=100.505%2C13.855%2C100.525%2C13.870&layer=mapnik&marker=13.8625%2C100.5147"
+      width="100%"
+      height="350"
+      loading="lazy"
+      title={lang === 'th' ? 'แผนที่สำนักงาน' : 'Office location map'}
+    ></iframe>
+  </section>
 </Layout>
 
 <style>
@@ -302,6 +312,15 @@ const contactInfo = [
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--color-primary);
+  }
+
+  .map {
+    line-height: 0;
+  }
+
+  .map iframe {
+    border: none;
+    display: block;
   }
 
   @media (max-width: 768px) {
